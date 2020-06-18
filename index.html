@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Яндекс, Практикум, Фото">
+  <meta name="author" content="Марк Брыгинский">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body>
+  <div class="page">
+    <form class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <fieldset class="popup__input-container">
+          <input type="reset" class="popup__close-button" value="">
+          <input type="text" class="popup__user-name" placeholder="Имя" value="">
+          <input type="text" class="popup__user-about" placeholder="О себе">
+        </fieldset>
+        <fieldset class="popup__input-container">
+          <input type="submit" class="popup__save-button" value="Сохранить">
+        </fieldset>
+      </div>
+    </form>
+    <header class="header">
+      <a href="#"><img class="header__logo" src="./images/header-logo.svg" alt="Места"></a>
+    </header>
+      <main class="content">
+        <section class="profile">
+          <img class="profile__avatar" src="./images/image.png" alt="аватар">
+            <div class="profile__info">
+              <div class="profile__info-row">
+                <p class="profile__user-name">Жак-Ив Кусто</p>
+                <button class="profile__edit-button"></button>
+              </div>
+              <figure class="profile__user-about">Исследователь океана</figure>
+            </div>
+          <button class="profile__add-button"></button>
+        </section>
+        <section class="photo-grid">
+          <ul class="photo-cards">
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/toronto.jpg" alt="Москва">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Москва</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/house.jpg" alt="Сызрань">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Сызрань</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/Omsk.jpg" alt="Омск">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Омск</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/nightsky.jpg" alt="Камчатка">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Камчатка</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/lake.jpg" alt="Алтай">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Алтай</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+          <li class="photo-card">
+            <img class="photo-card__image" src="./images/fall.jpg" alt="Нальчик">
+            <div class="photo-card__footer">
+              <h3 class="photo-card__title">Нальчик</h3>
+              <button class="photo-card__like-icon"></button>
+            </div>
+          </li>
+        </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+      </footer>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
