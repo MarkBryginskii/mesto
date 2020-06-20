@@ -1,9 +1,0 @@
-.popup__input-container {
-  margin: auto;
-  padding: 0px;
-  width: 358px;
-  border: none;
-  display: grid;
-  gap: 15px;
-  grid-template-rows: repeat(auto-fit, 1fr);
-}

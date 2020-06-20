@@ -9,7 +9,3 @@
 @import url(../blocks/photo-cards/photo-cards.css);
 @import url(../blocks/photo-card/photo-card.css);
 @import url(../blocks/footer/footer.css);
-
-.q {
-    border: 1px red solid;
-}

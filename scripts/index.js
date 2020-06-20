@@ -1,11 +1,11 @@
 const page = document.querySelector('.page');
-const formElement = page.querySelector('.popup');
+const formElement = document.querySelector('.popup');
 
 let pageUserName = page.querySelector('.profile__user-name');
 let pageUserAbout = page.querySelector('.profile__user-about');
 
-let nameInput = formElement.querySelector('.popup__user-name');
-let jobInput = formElement.querySelector('.popup__user-about');
+let nameInput = formElement.querySelector('#popup__user-name');
+let jobInput = formElement.querySelector('#popup__user-about');
 
 let editButton = page.querySelector('.profile__edit-button');
 let formCloseButton = formElement.querySelector('.popup__close-button');

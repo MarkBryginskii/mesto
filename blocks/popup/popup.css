@@ -1,9 +1,7 @@
 @import url(./__container/popup__container.css);
 @import url(./__close-button/popup__close-button.css);
 @import url(./__title/popup__title.css);
-@import url(./__input-container/popup__input-container.css);
-@import url(./__user-name/popup__user-name.css);
-@import url(./__user-about/popup__user-about.css);
+@import url(./__text-field/popup__text-field.css);
 @import url(./__save-button/popup__save-button.css);
 
 .popup {
@@ -16,3 +14,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

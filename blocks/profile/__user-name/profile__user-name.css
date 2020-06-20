@@ -1,6 +1,6 @@
 .profile__user-name {
   margin: 0px;
-  font-family: "Inter";
+  font-family: inherit;
   font-weight: 500;
   overflow-x: hidden;
   white-space: nowrap;

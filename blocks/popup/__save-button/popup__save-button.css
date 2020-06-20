@@ -1,13 +1,12 @@
 .popup__save-button {
-  margin: auto;
-  padding: 0px;
+  margin: 0px;
+  padding: 14px 0px 14px;
   width: 358px;
-  height: 50px;
   border: 0px;
   border-radius: 2px;
   background-color: #000000;
   color: #ffffff;
-  font-family: "Inter";
+  font-family: inherit;
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
