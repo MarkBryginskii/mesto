@@ -7,11 +7,25 @@
   background-color: #000000;
   color: #ffffff;
   font-family: inherit;
-  font-size: 18px;
-  line-height: 22px;
   cursor: pointer;
 }
 
 .popup__save-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (min-width: 882px) {
+  .popup__save-button {
+    width: 358px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 881px) {
+  .popup__save-button {
+    width: 200px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

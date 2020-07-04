@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <meta name="keywords" content="Яндекс, Практикум, Фото">
   <meta name="author" content="Марк Брыгинский">
   <link rel="stylesheet" href="./pages/index.css">
@@ -27,58 +27,43 @@
         </section>
         <section class="photo-grid">
           <ul class="photo-cards">
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/toronto.jpg" alt="Москва">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Москва</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/house.jpg" alt="Сызрань">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Сызрань</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/Omsk.jpg" alt="Омск">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Омск</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/nightsky.jpg" alt="Камчатка">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Камчатка</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/lake.jpg" alt="Алтай">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Алтай</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-            <li class="photo-card">
-              <img class="photo-card__image" src="./images/fall.jpg" alt="Нальчик">
-              <div class="photo-card__footer">
-                <h3 class="photo-card__title">Нальчик</h3>
-                <button type="button" class="photo-card__like-icon"></button>
-              </div>
-            </li>
-        </ul>
+            <!--Place for cards-->
+          </ul>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
   </div>
-  <form class="popup">
-    <div class="popup__container">
-      <input type="reset" class="popup__close-button" value="">
+  <template id="photo-card-template">
+    <li class="photo-card">
+      <button type="button" class="photo-card__trash-icon" value=""></button>
+      <img class="photo-card__image" src="" alt="">
+      <div class="photo-card__footer">
+        <h3 class="photo-card__title"></h3>
+        <button type="button" class="photo-card__like-icon"></button>
+      </div>
+    </li>
+  </template>
+  <form id="popupPhotoIncrease" class="popup popup_min-transparent">
+    <div class="popup__image-container">
+      <button type="reset" class="popup__close-button" value=""></button>
+      <img class="popup__image" src="" alt="">
+      <figure class="popup__image-figure"></figure>
+    </div>
+  </form>
+  <form id="popupAddPhoto" class="popup popup_half-transparent">
+    <div class="popup__form-container">
+      <button type="reset" class="popup__close-button" value=""></button>
+      <h2 class="popup__title">Новое место</h2>
+      <input id="popup__card-name" type="text" class="popup__text-field" placeholder="Название">
+      <input id="popup__card-link" type="url" class="popup__text-field" placeholder="Ссылка на картинку">
+      <button type="submit" class="popup__save-button">Создать</button>
+    </div>
+  </form>
+  <form id="popupEditProfile" class="popup popup_half-transparent">
+    <div class="popup__form-container">
+      <button type="reset" class="popup__close-button" value=""></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <input id="popup__user-name" type="text" class="popup__text-field" placeholder="Имя">
       <input id="popup__user-about" type="text" class="popup__text-field" placeholder="О себе">
