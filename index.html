@@ -35,6 +35,13 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
   </div>
+  <div id="popupIncreasePhoto" class="popup popup_min-transparent">
+    <div class="popup__image-container">
+      <button type="button" class="popup__close-button"></button>
+      <img class="popup__image" src="#" alt="#">
+      <figure class="popup__image-figure"></figure>
+    </div>
+  </div>
   <template id="photo-card-template">
     <li class="photo-card">
       <button type="button" class="photo-card__trash-icon" value=""></button>
@@ -45,13 +52,6 @@
       </div>
     </li>
   </template>
-  <form id="popupPhotoIncrease" class="popup popup_min-transparent">
-    <div class="popup__image-container">
-      <button type="reset" class="popup__close-button"></button>
-      <img class="popup__image" src="#" alt="#">
-      <figure class="popup__image-figure"></figure>
-    </div>
-  </form>
   <form id="popupAddPhoto" class="popup popup_half-transparent">
     <div class="popup__form-container">
       <button type="reset" class="popup__close-button" value=""></button>
