@@ -30,7 +30,6 @@ const initialCards = [
 const buttonAddPhoto = document.querySelector('.profile__add-button');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonsReset = document.querySelectorAll('.popup__close-button');
-const buttonsSave = document.querySelectorAll('.popup__save-button');
 
 
 const pageUserName = document.querySelector('.profile__user-name');
@@ -60,7 +59,7 @@ const photoContainer = document.querySelector('.photo-cards');
 
 // -----------------------------------------------------------------------------------------
 
-function toggleOpenClose (form) {
+function togglePopup (form) {
   form.classList.toggle('popup_opened');
 }
 
@@ -68,7 +67,7 @@ function saveProfile (event) {
   event.preventDefault();
   pageUserName.textContent = userNameInput.value;
   pageUserAbout.textContent = userAboutInput.value;
-  toggleOpenClose(popupEditProfile);
+  togglePopup(popupEditProfile);
 }
 
 function savePhoto (event) {
@@ -76,14 +75,14 @@ function savePhoto (event) {
   photoTitleInput.value !== '' || photoTitleInput.value !== '' ? photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value)) : alert('Необходимо заполнить все поля');
   photoTitleInput.value = '';
   photoLinkInput.value = '';
-  toggleOpenClose(popupAddPhoto);
+  togglePopup(popupAddPhoto);
 }
 
 function addCard(name, link) {
   const photoCard = photoCardTemplate.cloneNode(true);
 
-  photoCardImage = photoCard.querySelector('.photo-card__image');
-  photoCardTitle = photoCard.querySelector('.photo-card__title');
+  const photoCardImage = photoCard.querySelector('.photo-card__image');
+  const photoCardTitle = photoCard.querySelector('.photo-card__title');
 
   photoCardImage.setAttribute('src', link);
   photoCardImage.setAttribute('alt', name);
@@ -94,10 +93,8 @@ function addCard(name, link) {
   });
 
   photoCardImage.addEventListener('click',function (event) {
-    const photoCard = event.target.closest('.photo-card');
-
     increasePhoto(photoCardImage.src, photoCardTitle.textContent);
-    toggleOpenClose(popupIncreasePhoto);
+    togglePopup(popupIncreasePhoto);
   });
 
   photoCard.querySelector('.photo-card__like-icon').addEventListener('click',function (event) {
@@ -108,26 +105,26 @@ function addCard(name, link) {
 }
 
 function increasePhoto(image, title) {
-popupIncreasePhotoImage.src = image;
-popupIncreasePhotoImage.alt = title;
-popupIncreasePhotoFigure.textContent = title;
+  popupIncreasePhotoImage.src = image;
+  popupIncreasePhotoImage.alt = title;
+  popupIncreasePhotoFigure.textContent = title;
 }
 
 // -----------------------------------------------------------------------------------------
 
 buttonAddPhoto.addEventListener('click', (event) => {
-  toggleOpenClose(popupAddPhoto);
+  togglePopup(popupAddPhoto);
 });
 
 buttonEditProfile.addEventListener('click', (event) => {
   userNameInput.setAttribute('value',pageUserName.textContent);
   userAboutInput.setAttribute('value',pageUserAbout.textContent);
-  toggleOpenClose(popupEditProfile);
+  togglePopup(popupEditProfile);
 });
 
 buttonsReset.forEach ((buttonReset) => {
   buttonReset.addEventListener('click', function (event) {
-    toggleOpenClose(event.target.closest('.popup'));
+    togglePopup(event.target.closest('.popup'));
   });
 });
 
