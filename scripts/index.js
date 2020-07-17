@@ -37,6 +37,8 @@ const pageUserAbout = document.querySelector('.profile__user-about');
 
 // FORMS + FORM FIELDS
 
+const popupOverlays = document.querySelectorAll('.popup');
+
 const popupIncreasePhoto = document.querySelector('#popupIncreasePhoto');
 const popupIncreasePhotoImage = popupIncreasePhoto.querySelector('.popup__image');
 const popupIncreasePhotoFigure = popupIncreasePhoto.querySelector('.popup__image-figure');
@@ -72,9 +74,8 @@ function saveProfile (event) {
 
 function savePhoto (event) {
   event.preventDefault();
-  photoTitleInput.value !== '' || photoTitleInput.value !== '' ? photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value)) : alert('Необходимо заполнить все поля');
-  photoTitleInput.value = '';
-  photoLinkInput.value = '';
+  photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value));
+  popupAddPhoto.reset();
   togglePopup(popupAddPhoto);
 }
 
@@ -110,10 +111,25 @@ function increasePhoto(image, title) {
   popupIncreasePhotoFigure.textContent = title;
 }
 
+function saveOnEnter(form) {
+  if(event.key === 'Enter') {
+    console.log(event.target);
+    form.removeEventListener('keydown', saveOnEnter);
+    togglePopup(document.querySelector('.popup_opened'));
+  }
+}
+
 // -----------------------------------------------------------------------------------------
+
+document.addEventListener('keydown', (event) => {
+  if(event.key === 'Escape') {
+    togglePopup(document.querySelector('.popup_opened'));
+  }
+});
 
 buttonAddPhoto.addEventListener('click', (event) => {
   togglePopup(popupAddPhoto);
+  popupAddPhoto.addEventListener('keydown', saveOnEnter(popupAddPhoto));
 });
 
 buttonEditProfile.addEventListener('click', (event) => {
@@ -125,6 +141,14 @@ buttonEditProfile.addEventListener('click', (event) => {
 buttonsReset.forEach ((buttonReset) => {
   buttonReset.addEventListener('click', function (event) {
     togglePopup(event.target.closest('.popup'));
+  });
+});
+
+popupOverlays.forEach ((popupOverlay) => {
+  popupOverlay.addEventListener('click', function (event) {
+    if(event.target === popupOverlay) {
+      togglePopup(event.target.closest('.popup'));
+    }
   });
 });
 
