@@ -18,10 +18,18 @@ function checkValidity(formElement, inputElement) {
   }
 };
 
+function resetErrors(form) {
+  const inputList = Array.from(form.querySelectorAll('.popup__text-field'));
+  const submitButton = form.querySelector('.popup__save-button');
+  inputList.forEach((inputElement) => {
+    hideErrorDesc(form, inputElement);
+    toggleSubmitButton(inputList, submitButton);
+  });
+}
+
 function setEventListeners(formElement) {
   const inputList = Array.from(formElement.querySelectorAll('.popup__text-field'));
   const submitButton = formElement.querySelector('.popup__save-button');
-
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
@@ -49,11 +57,9 @@ function hasInvalidInput(inputList) {
 
 function toggleSubmitButton(inputList, submitButton) {
   if (hasInvalidInput(inputList)) {
-    console.log('est ohsibki');
     submitButton.setAttribute('disabled', true);
     submitButton.classList.add('popup__save-button_disabled');
   } else {
-    console.log('net oshibok');
     submitButton.removeAttribute('disabled');
     submitButton.classList.remove('popup__save-button_disabled');
   }
@@ -67,4 +73,3 @@ enableValidation({
   inputErrorClass: 'popup__text-field_error',
   errorClass: 'popup__input-error'
 });
-

@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // BUTTONS
 
 const buttonAddPhoto = document.querySelector('.profile__add-button');
@@ -61,22 +34,28 @@ const photoContainer = document.querySelector('.photo-cards');
 
 // -----------------------------------------------------------------------------------------
 
-function togglePopup (form) {
-  form.classList.toggle('popup_opened');
+function openPopup (form) {
+  resetErrors(form);
+  document.addEventListener('keydown', (event) => {hotKeyHandler(event, form);});
+  form.classList.add('popup_opened');
+}
+
+function closePopup (form) {
+  document.removeEventListener('keydown', (event) => {hotKeyHandler(event, form);});
+  form.classList.remove('popup_opened');
 }
 
 function saveProfile (event) {
   event.preventDefault();
   pageUserName.textContent = userNameInput.value;
   pageUserAbout.textContent = userAboutInput.value;
-  togglePopup(popupEditProfile);
+  closePopup(popupEditProfile);
 }
 
 function savePhoto (event) {
   event.preventDefault();
   photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value));
-  popupAddPhoto.reset();
-  togglePopup(popupAddPhoto);
+  closePopup(popupAddPhoto);
 }
 
 function addCard(name, link) {
@@ -93,9 +72,9 @@ function addCard(name, link) {
     event.target.closest('.photo-card').remove();
   });
 
-  photoCardImage.addEventListener('click',function (event) {
-    increasePhoto(photoCardImage.src, photoCardTitle.textContent);
-    togglePopup(popupIncreasePhoto);
+  photoCardImage.addEventListener('click',() => {
+    showIncreasedPhoto(photoCardImage.src, photoCardTitle.textContent);
+    openPopup(popupIncreasePhoto);
   });
 
   photoCard.querySelector('.photo-card__like-icon').addEventListener('click',function (event) {
@@ -105,49 +84,45 @@ function addCard(name, link) {
   return photoCard;
 }
 
-function increasePhoto(image, title) {
+function showIncreasedPhoto(image, title) {
   popupIncreasePhotoImage.src = image;
   popupIncreasePhotoImage.alt = title;
   popupIncreasePhotoFigure.textContent = title;
 }
 
-function saveOnEnter(form) {
-  if(event.key === 'Enter') {
-    console.log(event.target);
-    form.removeEventListener('keydown', saveOnEnter);
-    togglePopup(document.querySelector('.popup_opened'));
+function hotKeyHandler(event, form) {
+  switch (event.key) {
+    case 'Escape':
+      closePopup(form);
+      break;
+    case 'Enter':
+      form.submit();
+      break;
   }
 }
 
 // -----------------------------------------------------------------------------------------
 
-document.addEventListener('keydown', (event) => {
-  if(event.key === 'Escape') {
-    togglePopup(document.querySelector('.popup_opened'));
-  }
+buttonAddPhoto.addEventListener('click',() => {
+  openPopup(popupAddPhoto);
 });
 
-buttonAddPhoto.addEventListener('click', (event) => {
-  togglePopup(popupAddPhoto);
-  popupAddPhoto.addEventListener('keydown', saveOnEnter(popupAddPhoto));
-});
-
-buttonEditProfile.addEventListener('click', (event) => {
+buttonEditProfile.addEventListener('click',() => {
   userNameInput.setAttribute('value',pageUserName.textContent);
   userAboutInput.setAttribute('value',pageUserAbout.textContent);
-  togglePopup(popupEditProfile);
+  openPopup(popupEditProfile);
 });
 
 buttonsReset.forEach ((buttonReset) => {
   buttonReset.addEventListener('click', function (event) {
-    togglePopup(event.target.closest('.popup'));
+    closePopup(event.target.closest('.popup'));
   });
 });
 
 popupOverlays.forEach ((popupOverlay) => {
   popupOverlay.addEventListener('click', function (event) {
     if(event.target === popupOverlay) {
-      togglePopup(event.target.closest('.popup'));
+      closePopup(event.target.closest('.popup'));
     }
   });
 });
