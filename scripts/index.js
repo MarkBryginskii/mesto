@@ -96,7 +96,13 @@ function hotKeyHandler(event, form) {
       closePopup(form);
       break;
     case 'Enter':
-      form.submit();
+      if(form = popupAddPhoto) {
+        saveProfile;
+      }
+      else if (form = popupAddPhoto)
+      {
+        savePhoto;
+      }
       break;
   }
 }
