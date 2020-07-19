@@ -35,24 +35,24 @@ const photoContainer = document.querySelector('.photo-cards');
 // -----------------------------------------------------------------------------------------
 
 function openPopup (form) {
-  resetErrors(form);
   document.addEventListener('keydown', (event) => {hotKeyHandler(event, form);});
   form.classList.add('popup_opened');
 }
 
 function closePopup (form) {
+  resetForm(form);
   document.removeEventListener('keydown', (event) => {hotKeyHandler(event, form);});
   form.classList.remove('popup_opened');
 }
 
-function saveProfile (event) {
+function saveProfile() {
   event.preventDefault();
   pageUserName.textContent = userNameInput.value;
   pageUserAbout.textContent = userAboutInput.value;
   closePopup(popupEditProfile);
 }
 
-function savePhoto (event) {
+function savePhoto() {
   event.preventDefault();
   photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value));
   closePopup(popupAddPhoto);
@@ -95,15 +95,24 @@ function hotKeyHandler(event, form) {
     case 'Escape':
       closePopup(form);
       break;
-    case 'Enter':
-      if(form = popupAddPhoto) {
-        saveProfile;
-      }
-      else if (form = popupAddPhoto)
-      {
-        savePhoto;
-      }
-      break;
+  }
+}
+
+function resetForm(form) {
+  const inputList = Array.from(form.querySelectorAll('.popup__text-field'));
+  const submitButton = form.querySelector('.popup__save-button');
+
+  if(inputList.length > 0) {
+    form.reset();
+
+    inputList.forEach((inputElement) => {
+      inputElement.classList.remove('popup__text-field_error');
+      const errorElement = form.querySelector(`#${inputElement.id}-error`);
+      errorElement.textContent = '';
+    });
+
+    submitButton.setAttribute('disabled', true);
+    submitButton.classList.add('popup__save-button_disabled');
   }
 }
 
