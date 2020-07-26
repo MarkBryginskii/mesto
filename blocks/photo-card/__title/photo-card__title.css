@@ -1,6 +1,6 @@
 .photo-card__title {
   margin: 0px;
-  max-width: min-content;
+  max-width: fit-content;
   font-family: inherit;
   font-weight: 900;
   font-size: 24px;
