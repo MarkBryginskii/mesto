@@ -1,32 +1,37 @@
+import initialCards from './initial-cards.js';
+import Card from './Card.js';
+import PopupAddPhoto from './PopupAddPhoto.js';
+import PopupEditProfile from './PopupEditProfile.js';
+import FormValidator from './FormValidator.js';
+
+const obj =
+  {
+    formSelector: '.popup__form-container',
+    inputSelector: '.popup__text-field',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__text-field_error'
+  };
+
 // BUTTONS
 
 const buttonAddPhoto = document.querySelector('.profile__add-button');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
-const buttonsReset = document.querySelectorAll('.popup__close-button');
 
+// PAGE FIELDS
 
 const pageUserName = document.querySelector('.profile__user-name');
 const pageUserAbout = document.querySelector('.profile__user-about');
 
 // FORMS + FORM FIELDS
 
-const popupOverlays = document.querySelectorAll('.popup');
+const popupAddPhotoForm = document.querySelector('#popupAddPhoto');
+const photoTitleInput = popupAddPhotoForm.querySelector('#popup__card-name');
+const photoLinkInput = popupAddPhotoForm.querySelector('#popup__card-link');
 
-const popupIncreasePhoto = document.querySelector('#popupIncreasePhoto');
-const popupIncreasePhotoImage = popupIncreasePhoto.querySelector('.popup__image');
-const popupIncreasePhotoFigure = popupIncreasePhoto.querySelector('.popup__image-figure');
-
-const popupAddPhoto = document.querySelector('#popupAddPhoto');
-const photoTitleInput = popupAddPhoto.querySelector('#popup__card-name');
-const photoLinkInput = popupAddPhoto.querySelector('#popup__card-link');
-
-const popupEditProfile = document.querySelector('#popupEditProfile');
-const userNameInput = popupEditProfile.querySelector('#popup__user-name');
-const userAboutInput = popupEditProfile.querySelector('#popup__user-about');
-
-// TEMPLATES
-
-const photoCardTemplate = document.querySelector('#photo-card-template').content;
+const popupEditProfileForm = document.querySelector('#popupEditProfile');
+const userNameInput = popupEditProfileForm.querySelector('#popup__user-name');
+const userAboutInput = popupEditProfileForm.querySelector('#popup__user-about');
 
 // CONTAINERS
 
@@ -34,118 +39,18 @@ const photoContainer = document.querySelector('.photo-cards');
 
 // -----------------------------------------------------------------------------------------
 
-function openPopup (form) {
-  document.addEventListener('keydown', (event) => {hotKeyHandler(event, form);});
-  form.classList.add('popup_opened');
-}
-
-function closePopup (form) {
-  resetForm(form);
-  document.removeEventListener('keydown', (event) => {hotKeyHandler(event, form);});
-  form.classList.remove('popup_opened');
-}
-
-function saveProfile() {
-  event.preventDefault();
-  pageUserName.textContent = userNameInput.value;
-  pageUserAbout.textContent = userAboutInput.value;
-  closePopup(popupEditProfile);
-}
-
-function savePhoto() {
-  event.preventDefault();
-  photoContainer.prepend(addCard(photoTitleInput.value, photoLinkInput.value));
-  closePopup(popupAddPhoto);
-}
-
-function addCard(name, link) {
-  const photoCard = photoCardTemplate.cloneNode(true);
-
-  const photoCardImage = photoCard.querySelector('.photo-card__image');
-  const photoCardTitle = photoCard.querySelector('.photo-card__title');
-
-  photoCardImage.setAttribute('src', link);
-  photoCardImage.setAttribute('alt', name);
-  photoCardTitle.textContent = name;
-
-  photoCard.querySelector('.photo-card__trash-icon').addEventListener('click',function (event) {
-    event.target.closest('.photo-card').remove();
-  });
-
-  photoCardImage.addEventListener('click',() => {
-    showIncreasedPhoto(photoCardImage.src, photoCardTitle.textContent);
-    openPopup(popupIncreasePhoto);
-  });
-
-  photoCard.querySelector('.photo-card__like-icon').addEventListener('click',function (event) {
-    event.target.classList.toggle('photo-card__like-icon_active');
-  });
-
-  return photoCard;
-}
-
-function showIncreasedPhoto(image, title) {
-  popupIncreasePhotoImage.src = image;
-  popupIncreasePhotoImage.alt = title;
-  popupIncreasePhotoFigure.textContent = title;
-}
-
-function hotKeyHandler(event, form) {
-  switch (event.key) {
-    case 'Escape':
-      closePopup(form);
-      break;
-  }
-}
-
-function resetForm(form) {
-  const inputList = Array.from(form.querySelectorAll('.popup__text-field'));
-  const submitButton = form.querySelector('.popup__save-button');
-
-  if(inputList.length > 0) {
-    form.reset();
-
-    inputList.forEach((inputElement) => {
-      inputElement.classList.remove('popup__text-field_error');
-      const errorElement = form.querySelector(`#${inputElement.id}-error`);
-      errorElement.textContent = '';
-    });
-
-    submitButton.setAttribute('disabled', true);
-    submitButton.classList.add('popup__save-button_disabled');
-  }
-}
-
-// -----------------------------------------------------------------------------------------
-
 buttonAddPhoto.addEventListener('click',() => {
-  openPopup(popupAddPhoto);
+  new PopupAddPhoto(photoTitleInput, photoLinkInput, '#popupAddPhoto').openPopup();
+  new FormValidator(obj, '#popupAddPhoto').enableValidation();
 });
 
 buttonEditProfile.addEventListener('click',() => {
-  userNameInput.setAttribute('value',pageUserName.textContent);
-  userAboutInput.setAttribute('value',pageUserAbout.textContent);
-  openPopup(popupEditProfile);
+  new PopupEditProfile(userNameInput, userAboutInput, pageUserName, pageUserAbout, '#popupEditProfile').openPopup();
+  new FormValidator(obj, '#popupAddPhoto').enableValidation();
 });
 
-buttonsReset.forEach ((buttonReset) => {
-  buttonReset.addEventListener('click', function (event) {
-    closePopup(event.target.closest('.popup'));
-  });
-});
-
-popupOverlays.forEach ((popupOverlay) => {
-  popupOverlay.addEventListener('click', function (event) {
-    if(event.target === popupOverlay) {
-      closePopup(event.target.closest('.popup'));
-    }
-  });
-});
-
-popupEditProfile.addEventListener('submit', saveProfile);
-
-popupAddPhoto.addEventListener('submit', savePhoto);
-
-initialCards.forEach( (card) => {
-  photoContainer.prepend(addCard(card.name, card.link));
+initialCards.forEach((card) => {
+  const newСard = new Card(card.name, card.link, '#photo-card-template');
+  const cardElement = newСard.generateCard();
+  photoContainer.prepend(cardElement);
 });
