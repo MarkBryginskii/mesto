@@ -43,13 +43,19 @@ class Popup{
   }
 
   _closeByPopupOverlay() {
-    if(event.target.classList.contains('popup')) {
+
+    const area = event.target;
+
+    if(area.classList.contains('popup')) {
       this.closePopup();
     }
   }
 
   _hotKeyHandler() {
-    if(event.key === 'Escape') {
+
+    const keyName = event.key;
+
+    if(keyName === 'Escape') {
       this.closePopup();
     }
   }
