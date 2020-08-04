@@ -46,7 +46,7 @@ buttonAddPhoto.addEventListener('click',() => {
 
 buttonEditProfile.addEventListener('click',() => {
   new PopupEditProfile(userNameInput, userAboutInput, pageUserName, pageUserAbout, '#popupEditProfile').openPopup();
-  new FormValidator(obj, '#popupAddPhoto').enableValidation();
+  new FormValidator(obj, '#popupEditProfile').enableValidation();
 });
 
 initialCards.forEach((card) => {

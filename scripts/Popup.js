@@ -1,31 +1,27 @@
 class Popup{
   constructor(popup) {
     this.popup = popup;
+    this._hotKeyHandler = this._hotKeyHandler.bind(this);
+    this.closePopup = this.closePopup.bind(this);
+    this._closeByPopupOverlay = this._closeByPopupOverlay.bind(this);
   }
 
   _getPopup() {
     const _popupElement = document.querySelector(this.popup);
+
     return _popupElement;
   }
 
   _setEventListeners() {
-    document.addEventListener('keydown', (event) => {this._hotKeyHandler(event);});
-    this._popupElement.querySelector('.popup__close-button').addEventListener('click', (event) => {this.closePopup(event);});
-    this._popupElement.addEventListener('click', (event) => {
-      if(event.target.classList.contains('popup')) {
-        this.closePopup();
-      }
-    });
+    document.addEventListener('keydown', this._hotKeyHandler);
+    this._popupElement.querySelector('.popup__close-button').addEventListener('click', this.closePopup);
+    this._popupElement.addEventListener('click', this._closeByPopupOverlay);
   }
 
   _removeEventListeners() {
-    document.removeEventListener('keydown', (event) => {this._hotKeyHandler(event);});
-    this._popupElement.querySelector('.popup__close-button').removeEventListener('click', (event) => {this.closePopup(event);});
-    this._popupElement.removeEventListener('click', (event) => {
-      if(event.target.classList.contains('popup')) {
-        this.closePopup();
-      }
-    });
+    document.removeEventListener('keydown', this._hotKeyHandler);
+    this._popupElement.querySelector('.popup__close-button').removeEventListener('click', this.closePopup);
+    this._popupElement.removeEventListener('click', this._closeByPopupOverlay);
   }
 
   _resetForm() {
@@ -46,12 +42,15 @@ class Popup{
     }
   }
 
-  _hotKeyHandler(event) {
-    switch (event.key) {
-      case 'Escape':
-        console.log('1');
-        this.closePopup();
-        break;
+  _closeByPopupOverlay() {
+    if(event.target.classList.contains('popup')) {
+      this.closePopup();
+    }
+  }
+
+  _hotKeyHandler() {
+    if(event.key === 'Escape') {
+      this.closePopup();
     }
   }
 

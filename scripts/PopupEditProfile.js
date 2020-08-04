@@ -7,13 +7,14 @@ export class PopupEditProfile extends Popup {
     this._inputAbout = inputAbout;
     this._pageName = pageName;
     this._pageAbout = pageAbout;
+    this._saveProfile = this._saveProfile.bind(this);
   }
 
   openPopup() {
     this._inputName.setAttribute('value',this._pageName.textContent);
     this._inputAbout.setAttribute('value',this._pageAbout.textContent);
 
-    document.querySelector(this.popup).addEventListener('submit', (event) => {this._saveProfile(event);});
+    document.querySelector(this.popup).addEventListener('submit', this._saveProfile);
 
     super.openPopup();
   }
@@ -24,7 +25,7 @@ export class PopupEditProfile extends Popup {
     this._pageName.textContent = this._inputName.value;
     this._pageAbout.textContent = this._inputAbout.value;
 
-    document.querySelector(this.popup).removeEventListener('submit', (event) => {this._saveProfile(event);});
+    document.querySelector(this.popup).removeEventListener('submit', this._saveProfile);
 
     super.closePopup();
   }

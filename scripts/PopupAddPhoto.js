@@ -6,11 +6,12 @@ class PopupAddPhoto extends Popup {
     super(popup);
     this._title = title;
     this._link = link;
+    this._savePhoto = this._savePhoto.bind(this);
   }
 
   openPopup() {
     super.openPopup();
-    document.querySelector(this.popup).addEventListener('submit', (event) => {this._savePhoto(event);});
+    document.querySelector(this.popup).addEventListener('submit', this._savePhoto);
   }
 
   _savePhoto(event) {
@@ -22,7 +23,7 @@ class PopupAddPhoto extends Popup {
 
     _photoContainer.prepend(_cardElement);
 
-    document.querySelector(this.popup).removeEventListener('submit', (event) => {this._savePhoto(event);});
+    document.querySelector(this.popup).removeEventListener('submit', this._savePhoto);
 
     super.closePopup();
   }

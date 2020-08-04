@@ -8,41 +8,47 @@ class Card {
   }
 
   _getCardTemplate() {
-    const cardTemplate = document.querySelector(this._cardSelector).content.cloneNode(true);
+    const _cardTemplate = document.querySelector(this._cardSelector).content.querySelector('.photo-card').cloneNode(true);
 
-    return cardTemplate;
+    return _cardTemplate;
   }
 
   _setEventListeners() {
 
-    this._cardElement.querySelector('.photo-card__trash-icon').addEventListener('click', (event) => {
-      this._deleteCard(event);
+    this._cardElement.querySelector('.photo-card__trash-icon').addEventListener('click', () => {
+      this._deleteCard();
     });
 
-    this._cardElement.querySelector('.photo-card__like-icon').addEventListener('click', (event) => {
-      this._likeCard(event);
+    this._photoCardLike.addEventListener('click', () => {
+      this._likeCard();
     });
 
-    this._cardElement.querySelector('.photo-card__image').addEventListener('click', () => {
+    this._photoCardImage.addEventListener('click', () => {
       new PopupInceasedPhoto(this._cardLink , this._cardTitle, '#popupIncreasePhoto').showIncreasedPhoto();
     });
   }
 
   _deleteCard() {
-    event.target.closest('.photo-card').remove();
+    this._cardElement.closest('.photo-card').remove();
   }
 
   _likeCard() {
-    event.target.classList.toggle('photo-card__like-icon_active');
+    this._photoCardLike.classList.toggle('photo-card__like-icon_active');
   }
 
   generateCard() {
     this._cardElement = this._getCardTemplate();
+
+    this._photoCardTitle = this._cardElement.querySelector('.photo-card__title');
+    this._photoCardImage = this._cardElement.querySelector('.photo-card__image');
+    this._photoCardLike = this._cardElement.querySelector('.photo-card__like-icon');
+    this._photoCardTrash = this._cardElement.querySelector('.photo-card__trash-icon');
+
     this._setEventListeners();
 
-    this._cardElement.querySelector('.photo-card__title').textContent = this._cardTitle;
-    this._cardElement.querySelector('.photo-card__image').setAttribute('src', this._cardLink);
-    this._cardElement.querySelector('.photo-card__image').setAttribute('alt', this._cardTitle);
+    this._photoCardTitle.textContent = this._cardTitle;
+    this._photoCardImage.setAttribute('src', this._cardLink);
+    this._photoCardImage.setAttribute('alt', this._cardTitle);
 
     return this._cardElement;
   }
