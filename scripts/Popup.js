@@ -42,20 +42,14 @@ class Popup{
     }
   }
 
-  _closeByPopupOverlay() {
-
-    const area = event.target;
-
-    if(area.classList.contains('popup')) {
+  _closeByPopupOverlay(event) {
+    if(event.target.classList.contains('popup')) {
       this.closePopup();
     }
   }
 
-  _hotKeyHandler() {
-
-    const keyName = event.key;
-
-    if(keyName === 'Escape') {
+  _hotKeyHandler(event) {
+    if(event.key === 'Escape') {
       this.closePopup();
     }
   }
