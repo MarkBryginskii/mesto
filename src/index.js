@@ -1,4 +1,5 @@
 import './pages/index.css';
+
 import {initialCards, obj, buttonAddPhoto, buttonEditProfile, pageUserName, pageUserAbout} from './scripts/utils/constants.js';
 import Section from './scripts/components/Section.js';
 import Card from './scripts/components/Card.js';
