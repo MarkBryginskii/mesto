@@ -1,10 +1,9 @@
-import PopupInceasedPhoto from './PopupIncreasedPhoto.js';
-
 class Card {
-  constructor(name, link, cardSelector) {
-    this._cardTitle = name;
-    this._cardLink = link;
+  constructor(item, cardSelector, handleCardClick) {
+    this._cardTitle = item.name;
+    this._cardLink = item.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardTemplate() {
@@ -23,9 +22,7 @@ class Card {
       this._likeCard();
     });
 
-    this._photoCardImage.addEventListener('click', () => {
-      new PopupInceasedPhoto(this._cardLink , this._cardTitle, '#popupIncreasePhoto').showIncreasedPhoto();
-    });
+    this._photoCardImage.addEventListener('click', () => {this._handleCardClick.setImage(event);});
   }
 
   _deleteCard() {
@@ -55,3 +52,8 @@ class Card {
 }
 
 export default Card;
+
+// () => {
+    //   const increasedPhoto = new PopupWithImage(this._cardLink, this._cardTitle, '#popupIncreasePhoto');
+    //   increasedPhoto.openPopup();
+    // }

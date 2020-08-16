@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <meta name="keywords" content="Яндекс, Практикум, Фото">
   <meta name="author" content="Марк Брыгинский">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body>
@@ -58,11 +57,11 @@
       <button type="reset" class="popup__close-button" value=""></button>
       <h2 class="popup__title">Новое место</h2>
       <div class="popup__input-container">
-        <input id="popup__card-name" type="text" class="popup__text-field" autofocus placeholder="Название" minlength="1" maxlength="30" required>
+        <input data-field-name="name" id="popup__card-name" type="text" class="popup__text-field" autofocus placeholder="Название" minlength="1" maxlength="30" required>
         <span id="popup__card-name-error" class="popup__input-error"></span>
       </div>
       <div class="popup__input-container">
-        <input id="popup__card-link" type="url" class="popup__text-field" placeholder="Ссылка на картинку" required>
+        <input data-field-name="link" id="popup__card-link" type="url" class="popup__text-field" placeholder="Ссылка на картинку" required>
         <span id="popup__card-link-error" class="popup__input-error"></span>
       </div>
       <button type="submit" class="popup__save-button popup__save-button_disabled" disabled>Создать</button>
@@ -73,22 +72,15 @@
       <button type="reset" class="popup__close-button" value=""></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <div class="popup__input-container">
-        <input id="popup__user-name" type="text" class="popup__text-field" autofocus placeholder="Имя" minlength="2" maxlength="40" required>
+        <input data-field-name="name" id="popup__user-name" type="text" class="popup__text-field" autofocus placeholder="Имя" minlength="2" maxlength="40" required>
         <span id="popup__user-name-error" class="popup__input-error"></span>
       </div>
       <div class="popup__input-container">
-        <input id="popup__user-about" type="text" class="popup__text-field" placeholder="О себе" minlength="2" maxlength="200" required>
+        <input data-field-name="about" id="popup__user-about" type="text" class="popup__text-field" placeholder="О себе" minlength="2" maxlength="200" required>
         <span id="popup__user-about-error" class="popup__input-error"></span>
       </div>
       <button type="submit" class="popup__save-button popup__save-button_disabled" disabled>Сохранить</button>
     </div>
   </form>
-  <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/initial-cards.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
-  <!-- <script type="module" src="./scripts/card.js"></script>
-  <script type="module" src="./scripts/popup.js"></script>
-  <script type="module" src="./scripts/popupIncreasedPhoto.js"></script>
-  <script type="module" src="./scripts/popupAddPhoto.js"></script> -->
 </body>
 </html>

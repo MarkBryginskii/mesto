@@ -25,4 +25,23 @@ const initialCards = [
   }
 ];
 
-export default initialCards;
+const obj =
+  {
+    formSelector: '.popup__form-container',
+    inputSelector: '.popup__text-field',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__text-field_error'
+  };
+
+// BUTTONS
+
+const buttonAddPhoto = document.querySelector('.profile__add-button');
+const buttonEditProfile = document.querySelector('.profile__edit-button');
+
+// PAGE ELEMENTS
+
+const pageUserName = document.querySelector('.profile__user-name');
+const pageUserAbout = document.querySelector('.profile__user-about');
+
+export {initialCards, obj, buttonAddPhoto, buttonEditProfile, pageUserName, pageUserAbout};
