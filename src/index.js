@@ -13,7 +13,10 @@ const popupWithImage = new PopupWithImage('#popupIncreasePhoto');
 const photoList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const cardElement = new Card(item, '#photo-card-template', popupWithImage).generateCard();
+    const cardElement = new Card(item, '#photo-card-template', {
+      handleCardClick: () => {popupWithImage.openPopup();}
+    }
+    ).generateCard();
     photoList.addItem(cardElement);
   }
 },
@@ -25,10 +28,14 @@ photoList.renderer();
 buttonAddPhoto.addEventListener('click',() => {
 
   const popupAddPhoto = new PopupWithForm({submitCallBack: (values) => {
-    const cardElement = new Card(values, '#photo-card-template', popupWithImage).generateCard();
+    const cardElement = new Card(values, '#photo-card-template', {
+      handleCardClick: () => {popupWithImage.openPopup();}
+    }
+    ).generateCard();
     photoList.addItem(cardElement);
-  }}, '#popupAddPhoto');
-
+  }
+},
+'#popupAddPhoto');
   new FormValidator(obj, '#popupAddPhoto').enableValidation();
   popupAddPhoto.openPopup();
 });
@@ -46,3 +53,6 @@ buttonEditProfile.addEventListener('click',() => {
   PopupEditProfile.openPopup();
 });
 
+// , {
+//   handleCardClick: () => {popupWithImage.openPopup();}
+// }

@@ -1,5 +1,7 @@
+import PopupWithImage from './PopupWithImage';
+
 class Card {
-  constructor(item, cardSelector, handleCardClick) {
+  constructor(item, cardSelector, {handleCardClick}) {
     this._cardTitle = item.name;
     this._cardLink = item.link;
     this._cardSelector = cardSelector;
@@ -22,7 +24,7 @@ class Card {
       this._likeCard();
     });
 
-    this._photoCardImage.addEventListener('click', () => {this._handleCardClick.setImage(event);});
+    this._photoCardImage.addEventListener('click', this._handleCardClick);
   }
 
   _deleteCard() {

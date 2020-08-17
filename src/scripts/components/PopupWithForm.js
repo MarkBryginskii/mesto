@@ -1,7 +1,7 @@
 import Popup from './Popup.js';
 
 class PopupWithForm extends Popup {
-  constructor(submitCallBack, popup) {
+  constructor({submitCallBack}, popup) {
     super(popup);
     this._submitCallBack = submitCallBack;
     this._save = this._save.bind(this);
