@@ -25,7 +25,7 @@ const initialCards = [
   }
 ];
 
-const obj =
+const formSelectors =
   {
     formSelector: '.popup__form-container',
     inputSelector: '.popup__text-field',
@@ -34,14 +34,4 @@ const obj =
     inputErrorClass: 'popup__text-field_error'
   };
 
-// BUTTONS
-
-const buttonAddPhoto = document.querySelector('.profile__add-button');
-const buttonEditProfile = document.querySelector('.profile__edit-button');
-
-// PAGE ELEMENTS
-
-const pageUserName = document.querySelector('.profile__user-name');
-const pageUserAbout = document.querySelector('.profile__user-about');
-
-export {initialCards, obj, buttonAddPhoto, buttonEditProfile, pageUserName, pageUserAbout};
+export {initialCards, formSelectors};

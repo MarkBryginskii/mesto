@@ -1,11 +1,10 @@
-import PopupWithImage from './PopupWithImage';
-
 class Card {
   constructor(item, cardSelector, {handleCardClick}) {
     this._cardTitle = item.name;
     this._cardLink = item.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._increasedImage = this._increasedImage.bind(this);
   }
 
   _getCardTemplate() {
@@ -16,7 +15,7 @@ class Card {
 
   _setEventListeners() {
 
-    this._cardElement.querySelector('.photo-card__trash-icon').addEventListener('click', () => {
+    this._photoCardTrash.addEventListener('click', () => {
       this._deleteCard();
     });
 
@@ -24,7 +23,12 @@ class Card {
       this._likeCard();
     });
 
-    this._photoCardImage.addEventListener('click', this._handleCardClick);
+    this._photoCardImage.addEventListener('click', this._increasedImage);
+  }
+
+  _increasedImage() {
+    const cardData = {link: this._cardLink, title: this._cardTitle};
+    this._handleCardClick(cardData);
   }
 
   _deleteCard() {

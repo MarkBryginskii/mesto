@@ -6,8 +6,12 @@ class UserInfo {
     this._userAboutInput = document.querySelector('#popup__user-about');
   }
 
-  //забирает данные со строницы
   getUserInfo() {
+    const userInfo = {name: this._pageUserName.textContent, about: this._pageUserAbout.textContent};
+    return userInfo;
+  }
+
+  setInputValue() {
     this._userNameInput.setAttribute('value',this._pageUserName.textContent);
     this._userAboutInput.setAttribute('value',this._pageUserAbout.textContent);
   }

@@ -40,9 +40,29 @@ class FormValidator {
     });
   }
 
+  _formReset(popup, formElement) {
+
+    popup.reset();
+
+    const inputList = Array.from(formElement.querySelectorAll('.popup__text-field'));
+    const submitButton = formElement.querySelector('.popup__save-button');
+
+    inputList.forEach((inputElement) => {
+      inputElement.classList.remove('popup__text-field_error');
+      const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+      errorElement.textContent = '';
+    });
+
+    submitButton.setAttribute('disabled', true);
+    submitButton.classList.add('popup__save-button_disabled');
+
+  }
+
   enableValidation() {
     const popup = document.querySelector(this._popup);
     const formElement = popup.querySelector(this._formSelector);
+
+    this._formReset(popup, formElement);
 
     formElement.addEventListener('submit', (event) => {
         event.preventDefault();

@@ -32,26 +32,8 @@ class PopupWithForm extends Popup {
     this.closePopup();
   }
 
-  _formReset() {
-    this._popupElement.reset();
-
-    const inputList = Array.from(this._popupElement.querySelectorAll('.popup__text-field'));
-    const submitButton = this._popupElement.querySelector('.popup__save-button');
-
-    inputList.forEach((inputElement) => {
-      inputElement.classList.remove('popup__text-field_error');
-      const errorElement = this._popupElement.querySelector(`#${inputElement.id}-error`);
-      errorElement.textContent = '';
-    });
-
-    submitButton.setAttribute('disabled', true);
-    submitButton.classList.add('popup__save-button_disabled');
-
-  }
-
   closePopup() {
     super.closePopup();
-    this._formReset();
     this._popupElement.removeEventListener('submit', this._save);
   }
 }
