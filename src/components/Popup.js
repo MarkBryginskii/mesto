@@ -17,11 +17,6 @@ class Popup{
     this._popupElement.addEventListener('click', this._closeByPopupOverlay);
   }
 
-  _removeEventListeners() {
-    this._popupElement.querySelector('.popup__close-button').removeEventListener('click', this.closePopup);
-    this._popupElement.removeEventListener('click', this._closeByPopupOverlay);
-  }
-
   _closeByPopupOverlay(event) {
     if(event.target.classList.contains('popup')) {
       this.closePopup();
@@ -40,7 +35,6 @@ class Popup{
   }
 
   closePopup() {
-    this._removeEventListeners();
     document.removeEventListener('keydown', this._handleEscClose);
     this._popupElement.classList.remove('popup_opened');
   }

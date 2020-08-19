@@ -13,7 +13,6 @@ class PopupWithImage extends Popup {
     this._popupIncreasePhotoImage.alt = values.title;
     this._popupIncreasePhotoFigure.textContent = values.title;
 
-    super.setEventListeners();
     super.openPopup();
   }
 }

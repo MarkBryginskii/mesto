@@ -34,7 +34,6 @@ class PopupWithForm extends Popup {
 
   closePopup() {
     super.closePopup();
-    this._popupElement.removeEventListener('submit', this._save);
   }
 }
 

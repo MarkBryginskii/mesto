@@ -21,6 +21,7 @@ const pageUserAbout = document.querySelector('.profile__user-about');
 // POPUP WITH IMAGE
 
 const popupWithImage = new PopupWithImage('#popupIncreasePhoto');
+popupWithImage.setEventListeners();
 
 // POPUP ADD PHOTO
 
@@ -29,6 +30,7 @@ const popupAddPhoto = new PopupWithForm({submitCallBack: (values) => {
   photoList.addItem(cardElement);
   }
 },'#popupAddPhoto');
+popupAddPhoto.setEventListeners();
 const formValidatorAddPhoto = new FormValidator(formSelectors, '#popupAddPhoto');
 
 // POPUP EDIT PROFILE
@@ -38,6 +40,7 @@ const userAboutInput = document.querySelector('#popup__user-about');
 
 const popupEditProfile = new PopupWithForm({submitCallBack: (values) => {user.setUserInfo(values);}}, '#popupEditProfile');
 const user = new UserInfo({name: pageUserName, about: pageUserAbout});
+popupEditProfile.setEventListeners();
 
 function setInputValue() {
   const userInfo = user.getUserInfo();
@@ -68,13 +71,11 @@ photoList.renderer();
 
 buttonAddPhoto.addEventListener('click',() => {
   formValidatorAddPhoto.enableValidation();
-  popupAddPhoto.setEventListeners();
   popupAddPhoto.openPopup();
 });
 
 buttonEditProfile.addEventListener('click',() => {
   setInputValue();
   formValidatorEditProfile.enableValidation();
-  popupEditProfile.setEventListeners();
   popupEditProfile.openPopup();
 });
