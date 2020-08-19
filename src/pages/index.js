@@ -21,29 +21,36 @@ const pageUserAbout = document.querySelector('.profile__user-about');
 // POPUP WITH IMAGE
 
 const popupWithImage = new PopupWithImage('#popupIncreasePhoto');
-popupWithImage.setDefaultEventListeners();
 
 // POPUP ADD PHOTO
 
 const popupAddPhoto = new PopupWithForm({submitCallBack: (values) => {
-  const cardElement = _newCardElement(values);
+  const cardElement = newCardElement(values);
   photoList.addItem(cardElement);
   }
 },'#popupAddPhoto');
-popupAddPhoto.setDefaultEventListeners();
 const formValidatorAddPhoto = new FormValidator(formSelectors, '#popupAddPhoto');
 
 // POPUP EDIT PROFILE
 
+const userNameInput = document.querySelector('#popup__user-name');
+const userAboutInput = document.querySelector('#popup__user-about');
+
 const popupEditProfile = new PopupWithForm({submitCallBack: (values) => {user.setUserInfo(values);}}, '#popupEditProfile');
-popupEditProfile.setDefaultEventListeners();
 const user = new UserInfo({name: pageUserName, about: pageUserAbout});
+
+function setInputValue() {
+  const userInfo = user.getUserInfo();
+  userNameInput.setAttribute('value',userInfo.name);
+  userAboutInput.setAttribute('value',userInfo.about);
+}
+
 const formValidatorEditProfile = new FormValidator(formSelectors, '#popupEditProfile');
 
 // ༼ つ ◕_◕ ༽つ  ☆.。.:*・°☆.。 MAGIC ☆.。.:*・°☆.
 
-function _newCardElement(item) {
-  const cardElement = new Card(item, '#photo-card-template', {handleCardClick: (values) => {popupWithImage.setImage(values);}
+function newCardElement(item) {
+  const cardElement = new Card(item, '#photo-card-template', {handleCardClick: (values) => {popupWithImage.openPopup(values);}
   }).generateCard();
 
   return cardElement;
@@ -52,7 +59,7 @@ function _newCardElement(item) {
 const photoList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const cardElement = _newCardElement(item);
+    const cardElement = newCardElement(item);
     photoList.addItem(cardElement);
   }
 },'.photo-cards');
@@ -66,7 +73,7 @@ buttonAddPhoto.addEventListener('click',() => {
 });
 
 buttonEditProfile.addEventListener('click',() => {
-  user.setInputValue();
+  setInputValue();
   formValidatorEditProfile.enableValidation();
   popupEditProfile.setEventListeners();
   popupEditProfile.openPopup();
