@@ -1,4 +1,6 @@
+@import url(./__avatar-container/profile__avatar-container.css);
 @import url(./__avatar/profile__avatar.css);
+@import url(./__avatar-edit-button/profile__avatar-edit-button.css);
 @import url(./__info/profile__info.css);
 @import url(./__info-row/profile__info-row.css);
 @import url(./__user-name/profile__user-name.css);

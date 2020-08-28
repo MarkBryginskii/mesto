@@ -5,6 +5,11 @@ class PopupWithForm extends Popup {
     super(popup);
     this._submitCallBack = submitCallBack;
     this._save = this._save.bind(this);
+    this._saveButton = document.querySelector(popup).querySelector('.popup__save-button');
+  }
+
+  setButtonPendingState() {
+    this._popupElement.querySelector('.popup__save-button').textContent = 'Сохранение...';
   }
 
   _getInputValues() {
@@ -28,12 +33,6 @@ class PopupWithForm extends Popup {
 
     const values = this._getInputValues();
     this._submitCallBack(values);
-
-    this.closePopup();
-  }
-
-  closePopup() {
-    super.closePopup();
   }
 }
 

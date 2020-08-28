@@ -55,6 +55,7 @@ class FormValidator {
 
     submitButton.setAttribute('disabled', true);
     submitButton.classList.add('popup__save-button_disabled');
+    submitButton.textContent = 'Сохранить';
 
   }
 

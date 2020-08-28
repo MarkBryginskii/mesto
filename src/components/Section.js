@@ -10,7 +10,7 @@ class Section {
   }
 
   renderer() {
-    this._renderedItems.forEach((item) => {
+    this._renderedItems.reverse().forEach((item) => {
       this._renderer(item);
     });
   }
